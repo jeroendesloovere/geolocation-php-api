@@ -12,7 +12,13 @@
 require_once '../src/Geolocation/Geolocation.php';
 
 // define result
-$result = Geolocation::getCoordinates('rijksweg', '29', 'wielsbeke', '8710', 'belgium');
+$result = Geolocation::getCoordinates('Koningin Maria Hendrikaplein', '1', 'Gent', '1', 'belgium');
 
 // dump result
-echo 'Address coordinates = ' . $result['latitude'] . ', ' . $result['longitude'];
+echo 'Coordinates = ' . $result['latitude'] . ', ' . $result['longitude'] . '<br/>';
+
+// define result
+$result = Geolocation::getAddress(51.0363935, 3.7121008);
+
+// define result
+echo 'Address = ' . $result['label'];

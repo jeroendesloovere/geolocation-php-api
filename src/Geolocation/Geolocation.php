@@ -65,9 +65,46 @@ class Geolocation
 		// return the content
 		return $response->results;
 	}
+	
+	/**
+	 * Get address using latitude/longitude
+	 *
+	 * @param float $latitude
+	 * @param float $longitude
+	 * @return array(label, street, streetNumber, city, cityLocal, zip, country, countryLabel)
+	 */
+	public static function getAddress($latitude, $longitude)
+	{
+		// init item
+		$item = array();
+
+		// add latitude
+		if(!empty($latitude)) $item[] = $latitude;
+
+		// add longitude
+		if(!empty($longitude)) $item[] = $longitude;
+
+		// define value
+		$address = implode(' ', $item);
+
+		// define result
+		$results = self::doCall('?address=' . urlencode($address) . '&sensor=false');
+
+		// return address
+		return array(
+			'label' => (string) $results[0]->formatted_address,
+			'street' => (string) $results[0]->address_components[1]->short_name,
+			'streetNumber' => (string) $results[0]->address_components[0]->short_name,
+			'city' => (string) $results[0]->address_components[3]->short_name,
+			'cityLocal' => (string) $results[0]->address_components[2]->short_name,
+			'zip' => (string) $results[0]->address_components[7]->short_name,
+			'country' => (string) $results[0]->address_components[6]->short_name,
+			'countryLabel' => (string) $results[0]->address_components[6]->long_name
+		);	
+	}
 
 	/**
-	 * Get latitude/longitude
+	 * Get coordinates latitude/longitude
 	 *
 	 * @param string $street[optional]
 	 * @param string $streetNumber[optional]
