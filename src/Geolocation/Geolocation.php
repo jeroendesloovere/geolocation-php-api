@@ -75,20 +75,8 @@ class Geolocation
 	 */
 	public static function getAddress($latitude, $longitude)
 	{
-		// init item
-		$item = array();
-
-		// add latitude
-		if(!empty($latitude)) $item[] = $latitude;
-
-		// add longitude
-		if(!empty($longitude)) $item[] = $longitude;
-
-		// define value
-		$address = implode(' ', $item);
-
 		// define result
-		$results = self::doCall('?address=' . urlencode($address) . '&sensor=false');
+		$results = self::doCall('?latlng=' . urlencode($latitude . ',' . $longitude) . '&sensor=false');
 
 		// return address
 		return array(
