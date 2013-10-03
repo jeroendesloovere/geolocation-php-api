@@ -21,4 +21,4 @@ echo 'Coordinates = ' . $result['latitude'] . ', ' . $result['longitude'] . '<br
 $result = Geolocation::getAddress(51.0363935, 3.7121008);
 
 // define result
-echo 'Address = ' . $result['label'];
+echo 'Address = ' . $result['label'] . '<br/>';
