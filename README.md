@@ -13,6 +13,10 @@ Geolocation::getAddress(51.0363935, 3.7121008);
 ```
 [View tests](./tests/index.php) or [check class](./src/Geolocation/Geolocation.php).
 
+## Documentation
+
+The class is well documented inline. If you use a decent IDE you'll see that each method is documented with PHPDoc.
+
 ## Contributing
 
 It would be great if you could help us improve this class. GitHub does a great job in managing collaboration by providing different tools, the only thing you need is a [GitHub](http://github.com) login.
@@ -21,7 +25,6 @@ It would be great if you could help us improve this class. GitHub does a great j
 * **Issues** for bug reporting or code discussions
 * Or regarding documentation and how-to's, check out **Wiki**
 More info on how to work with GitHub on help.github.com.
-
 
 ## License
 
