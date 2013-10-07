@@ -25,7 +25,10 @@ class Geolocation
 		$url = self::API_URL . $method;
 
 		// check if curl is available
-		if(!function_exists('curl_init')) throw new GeolocationException('This method requires cURL (http://php.net/curl), it seems like the extension isn\'t installed.');
+		if(!function_exists('curl_init'))
+		{
+			throw new GeolocationException('This method requires cURL (http://php.net/curl), it seems like the extension isn\'t installed.');
+		}
 
 		// set options
 		$options[CURLOPT_URL] = (string) $url;
