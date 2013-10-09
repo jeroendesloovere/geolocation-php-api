@@ -28,4 +28,4 @@ More info on how to work with GitHub on help.github.com.
 
 ## License
 
-The module is licensed under [MIT](./LICENSE.md). In short, this license allows you to do everything as long as the copyright statement stays present.
+The module is licensed under [MIT](./LICENSE). In short, this license allows you to do everything as long as the copyright statement stays present.
