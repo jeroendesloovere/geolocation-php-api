@@ -17,7 +17,7 @@ $result = Geolocation::getCoordinates('Koningin Maria Hendrikaplein', '1', 'Gent
 // dump result
 echo 'Coordinates = ' . $result['latitude'] . ', ' . $result['longitude'] . '<br/>';
 
-// define result
+// define result: @return array(label, street, streetNumber, city, cityLocal, zip, country, countryLabel)
 $result = Geolocation::getAddress(51.0363935, 3.7121008);
 
 // define result

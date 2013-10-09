@@ -16,10 +16,9 @@ class Geolocation
 	 * Do call
 	 *
 	 * @param string $method
-	 * @param array $headerOptions[optional]
 	 * @return object
 	 */
-	protected static function doCall($method, $headerOptions = array())
+	protected static function doCall($method)
 	{
 		// define url
 		$url = self::API_URL . $method;
@@ -30,24 +29,14 @@ class Geolocation
 			throw new GeolocationException('This method requires cURL (http://php.net/curl), it seems like the extension isn\'t installed.');
 		}
 
-		// set options
-		$options[CURLOPT_URL] = (string) $url;
-		if(ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) $options[CURLOPT_FOLLOWLOCATION] = true;
-		$options[CURLOPT_RETURNTRANSFER] = true;
-		$options[CURLOPT_TIMEOUT] = 10;
-
-		// any extra options provided?
-		if($headerOptions !== null)
-		{
-			// loop the extra options
-			foreach($headerOptions as $key => $value) $options[$key] = $value;
-		}
-
-		// init
+		// init curl
 		$curl = curl_init();
 
 		// set options
-		curl_setopt_array($curl, $options);
+		curl_setopt($curl, CURLOPT_URL, (string) $url);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+		if(ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 
 		// execute
 		$response = curl_exec($curl);
@@ -56,10 +45,10 @@ class Geolocation
 		$errorNumber = curl_errno($curl);
 		$errorMessage = curl_error($curl);
 
-		// close
+		// close curl
 		curl_close($curl);
 
-		// validate
+		// we have errors
 		if($errorNumber != '') throw new GeolocationException($errorMessage);
 
 		// redefine response as json decoded
