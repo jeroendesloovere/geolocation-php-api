@@ -12,7 +12,7 @@
 require_once '../src/Geolocation/Geolocation.php';
 
 // define result
-$result = Geolocation::getCoordinates('Koningin Maria Hendrikaplein', '1', 'Gent', '1', 'belgium');
+$result = Geolocation::getCoordinates('Koningin Maria Hendrikaplein', '1', 'Gent', '9000', 'belgië');
 
 // dump result
 echo 'Coordinates = ' . $result['latitude'] . ', ' . $result['longitude'] . '<br/>';

@@ -15,25 +15,31 @@ class Geolocation
 	/**
 	 * Do call
 	 *
-	 * @param string $method
+	 * @param array $parameters
 	 * @return object
 	 */
-	protected static function doCall($method)
+	protected static function doCall($parameters = array())
 	{
-		// define url
-		$url = self::API_URL . $method;
-
 		// check if curl is available
 		if(!function_exists('curl_init'))
 		{
 			throw new GeolocationException('This method requires cURL (http://php.net/curl), it seems like the extension isn\'t installed.');
 		}
 
+		// define url
+		$url = self::API_URL . '?';
+
+		// add every parameter to the url
+		foreach($parameters as $key => $value) $url .= $key . '=' . urlencode($value) . '&';
+
+		// trim last &
+		$url = trim($url, '&');
+
 		// init curl
 		$curl = curl_init();
 
 		// set options
-		curl_setopt($curl, CURLOPT_URL, (string) $url);
+		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 		if(ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
@@ -68,7 +74,10 @@ class Geolocation
 	public static function getAddress($latitude, $longitude)
 	{
 		// define result
-		$results = self::doCall('?latlng=' . urlencode($latitude . ',' . $longitude) . '&sensor=false');
+		$results = self::doCall(array(
+			'latlng' => $latitude . ',' . $longitude,
+			'sensor' => 'false'
+		));
 
 		// return address
 		return array(
@@ -117,7 +126,10 @@ class Geolocation
 		$address = implode(' ', $item);
 
 		// define result
-		$results = self::doCall('?address=' . urlencode($address) . '&sensor=false');
+		$results = self::doCall(array(
+			'address' => $address,
+			'sensor' => 'false'
+		));
 
 		// return coordinates latitude/longitude
 		return array(
