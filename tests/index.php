@@ -9,7 +9,7 @@
  */
 
 // require Geolocation
-require_once '../src/Geolocation/Geolocation.php';
+require_once '../src/JeroenDesloovere/Geolocation/Geolocation.php';
 
 // define result
 $result = Geolocation::getCoordinates('Koningin Maria Hendrikaplein', '1', 'Gent', '9000', 'belgië');
