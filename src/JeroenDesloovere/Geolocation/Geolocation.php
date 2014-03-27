@@ -135,8 +135,8 @@ class Geolocation
 
         // return coordinates latitude/longitude
         return array(
-            'latitude' => (float) $results[0]->geometry->location->lat,
-            'longitude' => (float) $results[0]->geometry->location->lng
+            'latitude' => array_key_exists(0, $results) ? (float) $results[0]->geometry->location->lat : null,
+            'longitude' => array_key_exists(0, $results) ? (float) $results[0]->geometry->location->lng : null
         );
     }
 }
