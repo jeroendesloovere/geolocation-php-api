@@ -18,7 +18,7 @@ class Geolocation
      * Do call
      *
      * @return object
-     * @param array $parameters
+     * @param  array  $parameters
      */
     protected static function doCall($parameters = array())
     {
@@ -65,13 +65,13 @@ class Geolocation
         // return the content
         return $response->results;
     }
-    
+
     /**
      * Get address using latitude/longitude
      *
      * @return array(label, street, streetNumber, city, cityLocal, zip, country, countryLabel)
-     * @param float $latitude
-     * @param float $longitude
+     * @param  float        $latitude
+     * @param  float        $longitude
      */
     public static function getAddress($latitude, $longitude)
     {
@@ -91,18 +91,18 @@ class Geolocation
             'zip' => (string) $results[0]->address_components[7]->short_name,
             'country' => (string) $results[0]->address_components[6]->short_name,
             'countryLabel' => (string) $results[0]->address_components[6]->long_name
-        );    
+        );
     }
 
     /**
      * Get coordinates latitude/longitude
      *
-     * @return array The latitude/longitude coordinates
-     * @param string $street[optional]
-     * @param string $streetNumber[optional]
-     * @param string $city[optional]
-     * @param string $zip[optional]
-     * @param string $country[optional]
+     * @return array  The latitude/longitude coordinates
+     * @param  string $street[optional]
+     * @param  string $streetNumber[optional]
+     * @param  string $city[optional]
+     * @param  string $zip[optional]
+     * @param  string $country[optional]
      */
     public static function getCoordinates($street = null, $streetNumber = null, $city = null, $zip = null, $country = null)
     {
@@ -140,7 +140,6 @@ class Geolocation
         );
     }
 }
-
 
 /**
  * Geolocation Exception
