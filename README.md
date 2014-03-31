@@ -11,7 +11,7 @@ Geolocation::getCoordinates('Koningin Maria Hendrikaplein', '1', 'Gent', '1', 'b
 // get address from latitude/longitude coordinates
 Geolocation::getAddress(51.0363935, 3.7121008);
 ```
-[View tests](./tests/index.php) or [check class](./src/Geolocation/Geolocation.php).
+[View tests](./tests/index.php) or [check class](./src/JeroenDesloovere/Geolocation/Geolocation.php).
 
 ## Documentation
 
