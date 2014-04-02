@@ -5,10 +5,10 @@
  *
  * Get latitude/longitude or address using Google Maps API
  *
- * @author Jeroen Desloovere <jeroen@siesqo.be>
+ * @author Jeroen Desloovere <info@jeroendesloovere.be>
  */
 
-require_once __DIR__ . '/../src/JeroenDesloovere/Geolocation/Geolocation.php';
+require_once __DIR__ . '/../src/Geolocation.php';
 
 use JeroenDesloovere\Geolocation\Geolocation;
 
