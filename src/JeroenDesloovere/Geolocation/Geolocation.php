@@ -7,7 +7,7 @@ namespace JeroenDesloovere\Geolocation;
  *
  * Get latitude/longitude or address using Google Maps API
  *
- * @author Jeroen Desloovere <jeroen@siesqo.be>
+ * @author Jeroen Desloovere <info@jeroendesloovere.be>
  */
 class Geolocation
 {
@@ -144,6 +144,6 @@ class Geolocation
 /**
  * Geolocation Exception
  *
- * @author Jeroen Desloovere <jeroen@siesqo.be>
+ * @author Jeroen Desloovere <info@jeroendesloovere.be>
  */
 class GeolocationException extends Exception {}
