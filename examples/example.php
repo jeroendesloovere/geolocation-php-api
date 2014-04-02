@@ -8,8 +8,9 @@
  * @author Jeroen Desloovere <jeroen@siesqo.be>
  */
 
-// require Geolocation
-require_once '../src/JeroenDesloovere/Geolocation/Geolocation.php';
+require_once __DIR__ . '/../src/JeroenDesloovere/Geolocation/Geolocation.php';
+
+use JeroenDesloovere\Geolocation\Geolocation;
 
 // define result
 $result = Geolocation::getCoordinates('Koningin Maria Hendrikaplein', '1', 'Gent', '9000', 'belgië');
