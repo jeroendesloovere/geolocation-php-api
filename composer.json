@@ -1,9 +1,9 @@
 {
-    "name": "deslooverej/geolocation-php-api",
+    "name": "jeroendesloovere/geolocation-php-api",
     "type": "library",
     "description": "This Geolocation PHP class connects to Google Maps API to find latitude/longitude or address.",
     "keywords": ["geolocation", "google maps", "api", "php"],
-    "homepage": "https://github.com/deslooverej/geolocation-php-api",
+    "homepage": "https://github.com/jeroendesloovere/geolocation-php-api",
     "license": "MIT",
     "authors": [
         {
