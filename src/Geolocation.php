@@ -104,8 +104,13 @@ class Geolocation
      * @param  string $zip[optional]
      * @param  string $country[optional]
      */
-    public static function getCoordinates($street = null, $streetNumber = null, $city = null, $zip = null, $country = null)
-    {
+    public static function getCoordinates(
+        $street = null,
+        $streetNumber = null,
+        $city = null,
+        $zip = null,
+        $country = null
+    ) {
         // init item
         $item = array();
 
