@@ -8,14 +8,23 @@
 
 > Get latitude/longitude coordinates from address.
 ```
-Geolocation::getCoordinates('Koningin Maria Hendrikaplein', '1', 'Gent', '1', 'belgium');
+$street = 'Koningin Maria Hendrikaplein';
+$streetNumber = '1';
+$city = 'Gent';
+$zip = '1';
+$country = 'belgium';
+
+Geolocation::getCoordinates($street, $streetNumber, $city, $zip, $country);
 ```
 
 **getAddress**
 
 > Get address from latitude/longitude coordinates.
 ```
-Geolocation::getAddress(51.0363935, 3.7121008);
+$latitude = 51.0363935;
+$longitude = 3.7121008;
+
+Geolocation::getAddress($latitude, $longitude);
 ```
 
 [View tests](./examples/example.php) or [check class](./src/Geolocation.php).
