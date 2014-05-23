@@ -1,18 +1,20 @@
 # Geolocation PHP class connects to Google MAPS API
 
-This Geolocation PHP class connects to Google Maps API to find latitude/longitude or address.
+> This Geolocation PHP class connects to Google Maps API to find latitude/longitude or address.
 
 ## Public functions
 
 **getCoordinates**
+
+> Get latitude/longitude coordinates from address.
 ```
-// get latitude/longitude coordinates from address
 Geolocation::getCoordinates('Koningin Maria Hendrikaplein', '1', 'Gent', '1', 'belgium');
 ```
 
 **getAddress**
+
+> Get address from latitude/longitude coordinates.
 ```
-// get address from latitude/longitude coordinates
 Geolocation::getAddress(51.0363935, 3.7121008);
 ```
 
