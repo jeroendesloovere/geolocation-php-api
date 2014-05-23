@@ -7,6 +7,7 @@
 **getCoordinates**
 
 > Get latitude/longitude coordinates from address.
+
 ```
 $street = 'Koningin Maria Hendrikaplein';
 $streetNumber = '1';
@@ -20,6 +21,7 @@ Geolocation::getCoordinates($street, $streetNumber, $city, $zip, $country);
 **getAddress**
 
 > Get address from latitude/longitude coordinates.
+
 ```
 $latitude = 51.0363935;
 $longitude = 3.7121008;
