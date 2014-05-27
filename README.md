@@ -30,7 +30,7 @@ $city = 'Gent';
 $zip = '1';
 $country = 'belgium';
 
-Geolocation::getCoordinates($street, $streetNumber, $city, $zip, $country);
+$result = Geolocation::getCoordinates($street, $streetNumber, $city, $zip, $country);
 ```
 
 **getAddress**
@@ -41,7 +41,7 @@ Geolocation::getCoordinates($street, $streetNumber, $city, $zip, $country);
 $latitude = 51.0363935;
 $longitude = 3.7121008;
 
-Geolocation::getAddress($latitude, $longitude);
+$result = Geolocation::getAddress($latitude, $longitude);
 ```
 
 [View tests](./examples/example.php) or [check class](./src/Geolocation.php).
