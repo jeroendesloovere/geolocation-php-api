@@ -44,7 +44,7 @@ $longitude = 3.7121008;
 $result = Geolocation::getAddress($latitude, $longitude);
 ```
 
-[View tests](./examples/example.php) or [check class](./src/Geolocation.php).
+Check [the Geolocation class source](./src/Geolocation.php) or [view examples](./examples/example.php).
 
 ## Documentation
 
