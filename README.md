@@ -2,7 +2,22 @@
 
 > This Geolocation PHP class connects to Google Maps API to find latitude/longitude or address.
 
-## Public functions
+## Installing
+
+### Using Composer
+
+When using [Composer](https://getcomposer.org) you can always load in the latest version.
+
+```
+{
+    "require": {
+        "jeroendesloovere/geolocation-php-api": "dev-master"
+    }
+}
+```
+Check [in Packagist](https://packagist.org/packages/jeroendesloovere/geolocation-php-api).
+
+### Usage example
 
 **getCoordinates**
 
