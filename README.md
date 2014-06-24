@@ -8,7 +8,7 @@
 
 When using [Composer](https://getcomposer.org) you can always load in the latest version.
 
-```
+``` json
 {
     "require": {
         "jeroendesloovere/geolocation-php-api": "dev-master"
@@ -23,7 +23,7 @@ Check [in Packagist](https://packagist.org/packages/jeroendesloovere/geolocation
 
 > Get latitude/longitude coordinates from address.
 
-```
+``` php
 $street = 'Koningin Maria Hendrikaplein';
 $streetNumber = '1';
 $city = 'Gent';
@@ -37,7 +37,7 @@ $result = Geolocation::getCoordinates($street, $streetNumber, $city, $zip, $coun
 
 > Get address from latitude/longitude coordinates.
 
-```
+``` php
 $latitude = 51.0363935;
 $longitude = 3.7121008;
 
