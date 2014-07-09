@@ -146,7 +146,6 @@ class Geolocation
     }
 }
 
-
 /**
  * Geolocation Exception
  *
