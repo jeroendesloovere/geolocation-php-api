@@ -57,6 +57,7 @@ class GeolocationTest extends \PHPUnit_Framework_TestCase
             $longitude
         );
 
-        $this->assertEquals('tst', $result['label']);
+        $this->assertEquals('Prinses Clementinalaan 114-140, 9000 Gent, Belgium', $result['label']);
+        $this->assertEquals('array', gettype($result['components']));
     }
 }

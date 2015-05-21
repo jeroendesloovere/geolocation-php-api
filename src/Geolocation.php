@@ -69,29 +69,58 @@ class Geolocation
     /**
      * Get address using latitude/longitude
      *
-     * @return array(label, street, streetNumber, city, cityLocal, zip, country, countryLabel)
+     * @return array(label, components)
      * @param  float        $latitude
      * @param  float        $longitude
      */
     public static function getAddress($latitude, $longitude)
     {
+        $addressSuggestions = self::getAddresses($latitude, $longitude);
+
+        return $addressSuggestions[0];
+    }
+
+    /**
+     * Get possible addresses using latitude/longitude
+     *
+     * @return array(label, street, streetNumber, city, cityLocal, zip, country, countryLabel)
+     * @param  float        $latitude
+     * @param  float        $longitude
+     */
+    public static function getAddresses($latitude, $longitude)
+    {
+        // init results
+        $addresses = array();
+
         // define result
-        $results = self::doCall(array(
+        $addressSuggestions = self::doCall(array(
             'latlng' => $latitude . ',' . $longitude,
             'sensor' => 'false'
         ));
 
-        // return address
-        return array(
-            'label' => (string) $results[0]->formatted_address,
-            'street' => (string) $results[0]->address_components[1]->short_name,
-            'streetNumber' => (string) $results[0]->address_components[0]->short_name,
-            'city' => (string) $results[0]->address_components[3]->short_name,
-            'cityLocal' => (string) $results[0]->address_components[2]->short_name,
-            'zip' => (string) $results[0]->address_components[7]->short_name,
-            'country' => (string) $results[0]->address_components[6]->short_name,
-            'countryLabel' => (string) $results[0]->address_components[6]->long_name
-        );
+        // loop addresses
+        foreach ($addressSuggestions as $key => $addressSuggestion) {
+            // init address
+            $address = array();
+
+            // define label
+            $address['label'] = isset($addressSuggestion->formatted_address) ?
+                $addressSuggestion->formatted_address : null
+            ;
+
+            // define address components by looping all address components
+            foreach ($addressSuggestion->address_components as $component) {
+                $address['components'][] = array(
+                    'long_name' => $component->long_name,
+                    'short_name' => $component->short_name,
+                    'types' => $component->types
+                );
+            }
+
+            $addresses[$key] = $address;
+        }
+
+        return $addresses;
     }
 
     /**
