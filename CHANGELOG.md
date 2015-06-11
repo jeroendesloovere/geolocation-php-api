@@ -1,3 +1,8 @@
+1.3.0 (2015-06-11)
+--
+Improvements:
+* Core: removed static functions.
+
 1.2.0 (2015-05-21)
 --
 Improvements:
