@@ -20,7 +20,7 @@ class Geolocation
      * @return object
      * @param  array  $parameters
      */
-    protected static function doCall($parameters = array())
+    protected function doCall($parameters = array())
     {
         // check if curl is available
         if (!function_exists('curl_init')) {
@@ -73,9 +73,9 @@ class Geolocation
      * @param  float        $latitude
      * @param  float        $longitude
      */
-    public static function getAddress($latitude, $longitude)
+    public function getAddress($latitude, $longitude)
     {
-        $addressSuggestions = self::getAddresses($latitude, $longitude);
+        $addressSuggestions = $this->getAddresses($latitude, $longitude);
 
         return $addressSuggestions[0];
     }
@@ -87,13 +87,13 @@ class Geolocation
      * @param  float        $latitude
      * @param  float        $longitude
      */
-    public static function getAddresses($latitude, $longitude)
+    public function getAddresses($latitude, $longitude)
     {
         // init results
         $addresses = array();
 
         // define result
-        $addressSuggestions = self::doCall(array(
+        $addressSuggestions = $this->doCall(array(
             'latlng' => $latitude . ',' . $longitude,
             'sensor' => 'false'
         ));
@@ -133,7 +133,7 @@ class Geolocation
      * @param  string $zip[optional]
      * @param  string $country[optional]
      */
-    public static function getCoordinates(
+    public function getCoordinates(
         $street = null,
         $streetNumber = null,
         $city = null,
@@ -162,7 +162,7 @@ class Geolocation
         $address = implode(' ', $item);
 
         // define result
-        $results = self::doCall(array(
+        $results = $this->doCall(array(
             'address' => $address,
             'sensor' => 'false'
         ));
