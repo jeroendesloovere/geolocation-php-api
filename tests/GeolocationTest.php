@@ -21,6 +21,11 @@ use JeroenDesloovere\Geolocation\Geolocation;
  */
 class GeolocationTest extends \PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        $this->api = new Geolocation();
+    }
+
     /**
      * Test getting latitude/longitude coordinates from address.
      */
@@ -32,7 +37,7 @@ class GeolocationTest extends \PHPUnit_Framework_TestCase
         $zip = '1';
         $country = 'belgium';
         
-        $result = Geolocation::getCoordinates(
+        $result = $this->api->getCoordinates(
             $street,
             $streetNumber,
             $city,
@@ -52,7 +57,7 @@ class GeolocationTest extends \PHPUnit_Framework_TestCase
         $latitude = 51.0363935;
         $longitude = 3.7121008;
 
-        $result = Geolocation::getAddress(
+        $result = $this->api->getAddress(
             $latitude,
             $longitude
         );
