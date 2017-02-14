@@ -58,6 +58,11 @@ $result = Geolocation::getAddress(
 
 Check [the Geolocation class source](./src/Geolocation.php) or [view examples](./examples/example.php).
 
+## Symfony bundle
+
+I've also created a Symfony bundle.
+View the [Geolocation bundle](https://github.com/jeroendesloovere/geolocation-bundle).
+
 ## Documentation
 
 The class is well documented inline. If you use a decent IDE you'll see that each method is documented with PHPDoc.
