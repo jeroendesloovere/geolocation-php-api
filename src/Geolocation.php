@@ -14,6 +14,11 @@ class Geolocation
     // API URL
     const API_URL = 'http://maps.googleapis.com/maps/api/geocode/json';
 
+    public function __construct($api_key = null)
+    {
+        $this->api_key = $api_key;
+    }
+
     /**
      * Do call
      *
@@ -36,6 +41,10 @@ class Geolocation
 
         // trim last &
         $url = trim($url, '&');
+
+        if ($this->api_key) {
+            $url .= '&key=' . $this->api_key;
+        }
 
         // init curl
         $curl = curl_init();
