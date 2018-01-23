@@ -12,7 +12,20 @@ namespace JeroenDesloovere\Geolocation;
 class Geolocation
 {
     // API URL
-    const API_URL = 'http://maps.googleapis.com/maps/api/geocode/json';
+    const API_URL = 'maps.googleapis.com/maps/api/geocode/json';
+
+    private $api_key;
+    private $https;
+
+    public function __construct($api_key = null, $https = false)
+    {
+        $this->https = $https;
+
+        if ($api_key) {
+            $this->api_key = $api_key;
+            $this->https = true;
+        }
+    }
 
     /**
      * Do call
@@ -29,13 +42,17 @@ class Geolocation
         }
 
         // define url
-        $url = self::API_URL . '?';
+        $url = ($this->https ? 'https://' : 'http://') . self::API_URL . '?';
 
         // add every parameter to the url
         foreach ($parameters as $key => $value) $url .= $key . '=' . urlencode($value) . '&';
 
         // trim last &
         $url = trim($url, '&');
+
+        if ($this->api_key) {
+            $url .= '&key=' . $this->api_key;
+        }
 
         // init curl
         $curl = curl_init();
