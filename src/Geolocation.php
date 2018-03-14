@@ -80,7 +80,9 @@ class Geolocation
         $response = json_decode($response);
 
         // API returns with an error
-        if (isset($response->error_message)) throw new GeolocationException($response->error_message);
+        if (isset($response->error_message)) {
+            throw new GeolocationException($response->error_message);
+        }
 
         // return the content
         return $response->results;
