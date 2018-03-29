@@ -12,11 +12,7 @@
 When using [Composer](https://getcomposer.org) you can always load in the latest version.
 
 ``` json
-{
-    "require": {
-        "jeroendesloovere/geolocation-php-api": "1.3.*"
-    }
-}
+composer require jeroendesloovere/geolocation-php-api
 ```
 Check [in Packagist](https://packagist.org/packages/jeroendesloovere/geolocation-php-api).
 
@@ -56,7 +52,7 @@ $result = Geolocation::getAddress(
 );
 ```
 
-Check [the Geolocation class source](./src/Geolocation.php) or [view examples](./examples/example.php).
+Check [the Geolocation class source](./src/Geolocation.php).
 
 ## Symfony bundle
 
