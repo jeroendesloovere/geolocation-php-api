@@ -65,6 +65,19 @@ We have tests to make sure everything works as expected.
 First execute `composer install`.
 Then execute `vendor/bin/phpunit tests`.
 
+### Coding Syntax
+
+We use [squizlabs/php_codesniffer](https://packagist.org/packages/squizlabs/php_codesniffer) to maintain the code standards.
+Type the following to execute them:
+```bash
+# To view the code errors
+vendor/bin/phpcs --standard=psr2 --extensions=php --warning-severity=0 --report=full "src"
+
+# OR to fix the code errors
+vendor/bin/phpcbf --standard=psr2 --extensions=php --warning-severity=0 --report=full "src"
+```
+> [Read documentation about the code standards](https://github.com/squizlabs/PHP_CodeSniffer/wiki)
+
 ## Documentation
 
 The class is well documented inline. If you use a decent IDE you'll see that each method is documented with PHPDoc.
