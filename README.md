@@ -63,6 +63,12 @@ Check [the Geolocation class source](./src/Geolocation.php) or [view examples](.
 I've also created a Symfony bundle.
 View the [Geolocation bundle](https://github.com/jeroendesloovere/geolocation-bundle).
 
+## Tests
+
+We have tests to make sure everything works as expected.
+First execute `composer install`.
+Then execute `vendor/bin/phpunit tests`.
+
 ## Documentation
 
 The class is well documented inline. If you use a decent IDE you'll see that each method is documented with PHPDoc.
