@@ -48,7 +48,9 @@ class Geolocation
         $url = ($this->https ? 'https://' : 'http://') . self::API_URL . '?';
 
         // add every parameter to the url
-        foreach ($parameters as $key => $value) $url .= $key . '=' . urlencode($value) . '&';
+        foreach ($parameters as $key => $value) {
+            $url .= $key . '=' . urlencode($value) . '&';
+        }
 
         // trim last &
         $url = trim($url, '&');
@@ -64,7 +66,9 @@ class Geolocation
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-        if (ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        if (ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) {
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+        }
 
         // execute
         $response = curl_exec($curl);
@@ -77,7 +81,9 @@ class Geolocation
         curl_close($curl);
 
         // we have errors
-        if ($errorNumber != '') throw new Exception($errorMessage);
+        if ($errorNumber != '') {
+            throw new Exception($errorMessage);
+        }
 
         // redefine response as json decoded
         $response = json_decode($response);
@@ -159,19 +165,29 @@ class Geolocation
         $item = array();
 
         // add street
-        if (!empty($street)) $item[] = $street;
+        if (!empty($street)) {
+            $item[] = $street;
+        }
 
         // add street number
-        if (!empty($streetNumber)) $item[] = $streetNumber;
+        if (!empty($streetNumber)) {
+            $item[] = $streetNumber;
+        }
 
         // add city
-        if (!empty($city)) $item[] = $city;
+        if (!empty($city)) {
+            $item[] = $city;
+        }
 
         // add zip
-        if (!empty($zip)) $item[] = $zip;
+        if (!empty($zip)) {
+            $item[] = $zip;
+        }
 
         // add country
-        if (!empty($country)) $item[] = $country;
+        if (!empty($country)) {
+            $item[] = $country;
+        }
 
         // define value
         $address = implode(' ', $item);
