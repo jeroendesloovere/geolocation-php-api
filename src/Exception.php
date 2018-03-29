@@ -26,13 +26,4 @@ class Exception extends \Exception
              With address: "' . implode(', ', $addressData) . '".'
         );
     }
-
-    public static function overQueryLimit(): Exception
-    {
-        return new self(
-            'You have exceeded your daily request quota for this API.
-             We recommend registering for a key at the Google Developers Console:
-             https://console.developers.google.com/apis/credentials?project=_'
-        );
-    }
 }

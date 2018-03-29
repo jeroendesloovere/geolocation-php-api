@@ -1,6 +1,7 @@
 <?php
 
 namespace JeroenDesloovere\Geolocation;
+
 use JeroenDesloovere\Geolocation\Result\Address;
 use JeroenDesloovere\Geolocation\Result\Coordinates;
 
@@ -14,13 +15,26 @@ use JeroenDesloovere\Geolocation\Result\Coordinates;
 class Geolocation
 {
     // API URL
-    const API_URL = 'http://maps.googleapis.com/maps/api/geocode/json';
+    const API_URL = 'maps.googleapis.com/maps/api/geocode/json';
+
+    private $api_key;
+    private $https;
+
+    public function __construct($api_key = null, $https = false)
+    {
+        $this->https = $https;
+
+        if ($api_key) {
+            $this->api_key = $api_key;
+            $this->https = true;
+        }
+    }
 
     /**
      * Do call
      *
      * @param  array $parameters
-     * @return object
+     * @return mixed
      * @throws Exception
      */
     protected function doCall($parameters = array())
@@ -31,13 +45,17 @@ class Geolocation
         }
 
         // define url
-        $url = self::API_URL . '?';
+        $url = ($this->https ? 'https://' : 'http://') . self::API_URL . '?';
 
         // add every parameter to the url
         foreach ($parameters as $key => $value) $url .= $key . '=' . urlencode($value) . '&';
 
         // trim last &
         $url = trim($url, '&');
+
+        if ($this->api_key) {
+            $url .= '&key=' . $this->api_key;
+        }
 
         // init curl
         $curl = curl_init();
@@ -64,8 +82,9 @@ class Geolocation
         // redefine response as json decoded
         $response = json_decode($response);
 
-        if ($response->status === 'OVER_QUERY_LIMIT') {
-            throw Exception::overQueryLimit();
+        // API returns with an error
+        if (isset($response->error_message)) {
+            throw new Exception($response->error_message);
         }
 
         // return the content
