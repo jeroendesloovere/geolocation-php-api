@@ -1,6 +1,8 @@
 <?php
 
 namespace JeroenDesloovere\Geolocation;
+use JeroenDesloovere\Geolocation\Result\Address;
+use JeroenDesloovere\Geolocation\Result\Coordinates;
 
 /**
  * Geolocation
@@ -17,15 +19,15 @@ class Geolocation
     /**
      * Do call
      *
+     * @param  array $parameters
      * @return object
-     * @param  array  $parameters
+     * @throws Exception
      */
     protected function doCall($parameters = array())
     {
         // check if curl is available
         if (!function_exists('curl_init')) {
-            // throw error
-            throw new GeolocationException('This method requires cURL (http://php.net/curl), it seems like the extension isn\'t installed.');
+            throw Exception::CurlNotInstalled();
         }
 
         // define url
@@ -57,10 +59,14 @@ class Geolocation
         curl_close($curl);
 
         // we have errors
-        if ($errorNumber != '') throw new GeolocationException($errorMessage);
+        if ($errorNumber != '') throw new Exception($errorMessage);
 
         // redefine response as json decoded
         $response = json_decode($response);
+
+        if ($response->status === 'OVER_QUERY_LIMIT') {
+            throw Exception::overQueryLimit();
+        }
 
         // return the content
         return $response->results;
@@ -69,13 +75,18 @@ class Geolocation
     /**
      * Get address using latitude/longitude
      *
-     * @return array(label, components)
-     * @param  float        $latitude
-     * @param  float        $longitude
+     * @param  float $latitude
+     * @param  float $longitude
+     * @return Address
+     * @throws Exception
      */
-    public function getAddress($latitude, $longitude)
+    public function getAddress($latitude, $longitude): Address
     {
         $addressSuggestions = $this->getAddresses($latitude, $longitude);
+
+        if (count($addressSuggestions) == 0) {
+            throw Exception::noAddressFoundForCoordinates($latitude, $longitude);
+        }
 
         return $addressSuggestions[0];
     }
@@ -83,9 +94,10 @@ class Geolocation
     /**
      * Get possible addresses using latitude/longitude
      *
-     * @return array(label, street, streetNumber, city, cityLocal, zip, country, countryLabel)
-     * @param  float        $latitude
-     * @param  float        $longitude
+     * @param  float $latitude
+     * @param  float $longitude
+     * @return array
+     * @throws Exception
      */
     public function getAddresses($latitude, $longitude)
     {
@@ -100,24 +112,7 @@ class Geolocation
 
         // loop addresses
         foreach ($addressSuggestions as $key => $addressSuggestion) {
-            // init address
-            $address = array();
-
-            // define label
-            $address['label'] = isset($addressSuggestion->formatted_address) ?
-                $addressSuggestion->formatted_address : null
-            ;
-
-            // define address components by looping all address components
-            foreach ($addressSuggestion->address_components as $component) {
-                $address['components'][] = array(
-                    'long_name' => $component->long_name,
-                    'short_name' => $component->short_name,
-                    'types' => $component->types
-                );
-            }
-
-            $addresses[$key] = $address;
+            $addresses[$key] = Address::createFromGoogleResult($addressSuggestion);
         }
 
         return $addresses;
@@ -126,20 +121,21 @@ class Geolocation
     /**
      * Get coordinates latitude/longitude
      *
-     * @return array  The latitude/longitude coordinates
-     * @param  string $street[optional]
-     * @param  string $streetNumber[optional]
-     * @param  string $city[optional]
-     * @param  string $zip[optional]
-     * @param  string $country[optional]
+     * @param  null|string $street
+     * @param  null|string $streetNumber
+     * @param  null|string $city
+     * @param  null|string $zip
+     * @param  null|string $country
+     * @return Coordinates
+     * @throws Exception
      */
     public function getCoordinates(
-        $street = null,
-        $streetNumber = null,
-        $city = null,
-        $zip = null,
-        $country = null
-    ) {
+        ?string $street = null,
+        ?string $streetNumber = null,
+        ?string $city = null,
+        ?string $zip = null,
+        ?string $country = null
+    ): Coordinates {
         // init item
         $item = array();
 
@@ -167,17 +163,13 @@ class Geolocation
             'sensor' => 'false'
         ));
 
-        // return coordinates latitude/longitude
-        return array(
-            'latitude' => array_key_exists(0, $results) ? (float) $results[0]->geometry->location->lat : null,
-            'longitude' => array_key_exists(0, $results) ? (float) $results[0]->geometry->location->lng : null
+        if (!array_key_exists(0, $results)) {
+            throw Exception::noCoordinatesFoundforAddress([$street, $streetNumber, $city, $zip, $country]);
+        }
+
+        return new Coordinates(
+            $results[0]->geometry->location->lat,
+            $results[0]->geometry->location->lng
         );
     }
 }
-
-/**
- * Geolocation Exception
- *
- * @author Jeroen Desloovere <info@jeroendesloovere.be>
- */
-class GeolocationException extends \Exception {}

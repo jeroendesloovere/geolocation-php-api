@@ -13,15 +13,19 @@ require_once __DIR__ . '/../vendor/autoload.php';
  */
 
 use JeroenDesloovere\Geolocation\Geolocation;
+use PHPUnit\Framework\TestCase;
 
 /**
  * In this class we test all generic functions from Geolocation.
  *
  * @author Jeroen Desloovere <info@jeroendesloovere.be>
  */
-class GeolocationTest extends \PHPUnit_Framework_TestCase
+class GeolocationTest extends TestCase
 {
-    public function setUp()
+    /** @var Geolocation */
+    private $api;
+
+    public function setUp(): void
     {
         $this->api = new Geolocation();
     }
@@ -29,14 +33,14 @@ class GeolocationTest extends \PHPUnit_Framework_TestCase
     /**
      * Test getting latitude/longitude coordinates from address.
      */
-    public function testGettingLatitudeAndLongitudeFromAddress()
+    public function testGettingLatitudeAndLongitudeFromAddress(): void
     {
         $street = 'Koningin Maria Hendrikaplein';
         $streetNumber = '1';
         $city = 'Gent';
         $zip = '1';
         $country = 'belgium';
-        
+
         $result = $this->api->getCoordinates(
             $street,
             $streetNumber,
@@ -45,14 +49,14 @@ class GeolocationTest extends \PHPUnit_Framework_TestCase
             $country
         );
 
-        $this->assertEquals(51.037249600000003, $result['latitude']);
-        $this->assertEquals(3.7094974999999999, $result['longitude']);
+        $this->assertEquals(51.037249600000003, $result->getLatitude());
+        $this->assertEquals(3.7094974999999999, $result->getLongitude());
     }
 
     /**
      * Test getting address from latitude and longitude coordinates.
      */
-    public function testGetAddressFromLatitudeAndLongitude()
+    public function testGetAddressFromLatitudeAndLongitude(): void
     {
         $latitude = 51.0363935;
         $longitude = 3.7121008;
@@ -62,7 +66,6 @@ class GeolocationTest extends \PHPUnit_Framework_TestCase
             $longitude
         );
 
-        $this->assertEquals('Prinses Clementinalaan 114-140, 9000 Gent, Belgium', $result['label']);
-        $this->assertEquals('array', gettype($result['components']));
+        $this->assertEquals('Pr. Clementinalaan 114-140, 9000 Gent, Belgium', $result->getLabel());
     }
 }
