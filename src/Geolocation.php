@@ -33,20 +33,8 @@ class Geolocation
         }
     }
 
-    /**
-     * Do call
-     *
-     * @param  array $parameters
-     * @return mixed
-     * @throws Exception
-     */
-    protected function doCall(array $parameters = array())
+    private function createUrl(array $parameters): string
     {
-        // check if curl is available
-        if (!function_exists('curl_init')) {
-            throw Exception::CurlNotInstalled();
-        }
-
         // define url
         $url = ($this->https ? 'https://' : 'http://') . self::API_URL . '?';
 
@@ -62,11 +50,28 @@ class Geolocation
             $url .= '&key=' . $this->api_key;
         }
 
+        return $url;
+    }
+
+    /**
+     * Do call
+     *
+     * @param  array $parameters
+     * @return mixed
+     * @throws Exception
+     */
+    protected function doCall(array $parameters = array())
+    {
+        // check if curl is available
+        if (!function_exists('curl_init')) {
+            throw Exception::CurlNotInstalled();
+        }
+
         // init curl
         $curl = curl_init();
 
         // set options
-        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_URL, $this->createUrl($parameters));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
         if (ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) {
