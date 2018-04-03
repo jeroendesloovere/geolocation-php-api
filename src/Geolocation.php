@@ -14,7 +14,6 @@ use JeroenDesloovere\Geolocation\Result\Coordinates;
  */
 class Geolocation
 {
-    // API URL
     const API_URL = 'maps.googleapis.com/maps/api/geocode/json';
 
     /** @var string */
