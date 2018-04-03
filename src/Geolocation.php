@@ -170,12 +170,12 @@ class Geolocation
     ): Coordinates {
         $items = [];
         $variables = [$street, $streetNumber, $city, $zip, $country];
-        for ($i = 0; $i < count($variables); $i ++) {
-            if (empty($variables[$i])) {
+        foreach ($variables as $variable) {
+            if (empty($variable)) {
                 continue;
             }
 
-            $items[] = $variables[$i];
+            $items[] = $variable;
         }
 
         $results = $this->doCall(array(
