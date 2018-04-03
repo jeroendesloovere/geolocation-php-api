@@ -18,17 +18,17 @@ class Geolocation
     const API_URL = 'maps.googleapis.com/maps/api/geocode/json';
 
     /** @var string */
-    private $api_key;
+    private $apiKey;
 
     /** @var bool */
     private $https;
 
-    public function __construct(string $api_key = null, bool $https = false)
+    public function __construct(string $apiKey = null, bool $https = false)
     {
         $this->https = $https;
 
         if ($api_key) {
-            $this->api_key = $api_key;
+            $this->apiKey = $apiKey;
             $this->https = true;
         }
     }
@@ -46,8 +46,8 @@ class Geolocation
         // trim last &
         $url = trim($url, '&');
 
-        if ($this->api_key) {
-            $url .= '&key=' . $this->api_key;
+        if ($this->apiKey) {
+            $url .= '&key=' . $this->apiKey;
         }
 
         return $url;
