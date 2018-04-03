@@ -169,45 +169,23 @@ class Geolocation
         ?string $zip = null,
         ?string $country = null
     ): Coordinates {
-        // init item
-        $item = array();
+        $items = [];
+        $variables = [$street, $streetNumber, $city, $zip, $country];
+        for ($i = 0; $i < count($variables); $i ++) {
+            if (empty($variables[$i])) {
+                continue;
+            }
 
-        // add street
-        if (!empty($street)) {
-            $item[] = $street;
+            $items[] = $variables[$i];
         }
 
-        // add street number
-        if (!empty($streetNumber)) {
-            $item[] = $streetNumber;
-        }
-
-        // add city
-        if (!empty($city)) {
-            $item[] = $city;
-        }
-
-        // add zip
-        if (!empty($zip)) {
-            $item[] = $zip;
-        }
-
-        // add country
-        if (!empty($country)) {
-            $item[] = $country;
-        }
-
-        // define value
-        $address = implode(' ', $item);
-
-        // define result
         $results = $this->doCall(array(
-            'address' => $address,
+            'address' => implode(' ', $items),
             'sensor' => 'false'
         ));
 
         if (!array_key_exists(0, $results)) {
-            throw Exception::noCoordinatesFoundforAddress([$street, $streetNumber, $city, $zip, $country]);
+            throw Exception::noCoordinatesFoundforAddress($variables);
         }
 
         return new Coordinates(
