@@ -135,7 +135,7 @@ class Geolocation
     public function getAddresses(float $latitude, float $longitude): ?array
     {
         // init results
-        $addresses = array();
+        $addresses = [];
 
         // define result
         $addressSuggestions = $this->doCall(array(
