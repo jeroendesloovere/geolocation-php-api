@@ -27,7 +27,7 @@ class Geolocation
     {
         $this->https = $https;
 
-        if ($api_key) {
+        if ($apiKey !== null) {
             $this->apiKey = $apiKey;
             $this->https = true;
         }
