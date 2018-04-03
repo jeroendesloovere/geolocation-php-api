@@ -17,10 +17,13 @@ class Geolocation
     // API URL
     const API_URL = 'maps.googleapis.com/maps/api/geocode/json';
 
+    /** @var string */
     private $api_key;
+
+    /** @var bool */
     private $https;
 
-    public function __construct($api_key = null, $https = false)
+    public function __construct(string $api_key = null, bool $https = false)
     {
         $this->https = $https;
 
@@ -37,7 +40,7 @@ class Geolocation
      * @return mixed
      * @throws Exception
      */
-    protected function doCall($parameters = array())
+    protected function doCall(array $parameters = array())
     {
         // check if curl is available
         if (!function_exists('curl_init')) {
@@ -105,7 +108,7 @@ class Geolocation
      * @return Address
      * @throws Exception
      */
-    public function getAddress($latitude, $longitude): Address
+    public function getAddress(float $latitude, float $longitude): Address
     {
         $addressSuggestions = $this->getAddresses($latitude, $longitude);
 
@@ -124,7 +127,7 @@ class Geolocation
      * @return array
      * @throws Exception
      */
-    public function getAddresses($latitude, $longitude)
+    public function getAddresses(float $latitude, float $longitude): ?array
     {
         // init results
         $addresses = array();
