@@ -22,7 +22,7 @@ class Geolocation
     /** @var bool */
     private $https;
 
-    public function __construct(string $apiKey = null, bool $https = false)
+    public function __construct(string $apiKey = null, bool $https = true)
     {
         $this->https = $https;
 
