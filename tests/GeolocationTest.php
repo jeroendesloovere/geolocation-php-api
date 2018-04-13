@@ -68,4 +68,22 @@ class GeolocationTest extends TestCase
 
         $this->assertEquals('Pr. Clementinalaan 114-140, 9000 Gent, Belgium', $result->getLabel());
     }
+
+    /**
+     * Test getting latitude/longitude coordinates from address.
+     */
+    public function testGettingLatitudeAndLongitudeFromAddressWithoutHTTPS(): void
+    {
+        $this->api = new Geolocation(null, false);
+        $this->testGettingLatitudeAndLongitudeFromAddress();
+    }
+
+    /**
+     * Test getting address from latitude and longitude coordinates.
+     */
+    public function testGetAddressFromLatitudeAndLongitudeWithoutHTTPS(): void
+    {
+        $this->api = new Geolocation(null, false);
+        $this->testGetAddressFromLatitudeAndLongitude();
+    }
 }
