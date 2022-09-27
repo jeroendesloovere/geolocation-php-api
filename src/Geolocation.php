@@ -88,7 +88,7 @@ class Geolocation
         curl_close($curl);
 
         // we have errors
-        if ($errorNumber != '') {
+        if ($errorNumber !== 0) {
             throw new Exception($errorMessage);
         }
 
