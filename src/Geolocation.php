@@ -73,7 +73,7 @@ class Geolocation
         curl_setopt($curl, CURLOPT_URL, $this->createUrl($parameters));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-        if (ini_get('open_basedir') == '' && ini_get('safe_mode' == 'Off')) {
+        if (ini_get('open_basedir') == '' && ini_get('safe_mode') == 'Off') {
             curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         }
 
