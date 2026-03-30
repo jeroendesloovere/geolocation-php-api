@@ -77,7 +77,7 @@ vendor/bin/phpcs --standard=psr2 --extensions=php --warning-severity=0 --report=
 # OR to fix the code errors
 vendor/bin/phpcbf --standard=psr2 --extensions=php --warning-severity=0 --report=full "src"
 ```
-> [Read documentation about the code standards](https://github.com/squizlabs/PHP_CodeSniffer/wiki)
+> [Read documentation about the code standards](https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki)
 
 ## Documentation
 
